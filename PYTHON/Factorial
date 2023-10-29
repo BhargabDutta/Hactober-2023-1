@@ -1,12 +1,27 @@
 #program to find Factorial of a Given recrusive call
+# Memoization dictionary to store already computed factorials
+memo = {}
 
-def refact(n):
-    if n==0:
+# Recursive function to calculate factorial
+def factorial_recursive(n):
+    if n in memo:
+        # If the result is already computed, return it
+        return memo[n]
+    if n == 0:
+        # Base case: 0! = 1
         return 1
     else:
-       p=n*refact(n-1)
-       return p
+        # Recursive case: calculate and store the result
+        result = n * factorial_recursive(n - 1)
+        memo[n] = result
+        return result
 
-n=int(input("Enter any number of your choice"))
-fact=refact(n)
-print("The Factorial of a given number is",fact)
+# Input from the user
+n = int(input("Enter a non-negative integer: "))
+
+if n < 0:
+    print("Factorial is not defined for negative numbers.")
+else:
+    result = factorial_recursive(n)
+    print(f"The factorial of {n} is {result}")
+
