@@ -1,57 +1,43 @@
-#include<iostream>
-using namespace std;
- 
-/*
-Best Time Complexity : O(n)
-Average Time Complexity : O(n^2)
-Worst Time Complexity : O(n^2)
-Worst Space Complexity : O(1)
-*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-//Swap Function
-void swap(int *x, int *y){  
-    int temp;
-    temp=*x;
-    *x=*y;
-    *y=temp;
+// Swap Function
+void swap(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
 }
 
-//Print Function
-void printArray(int A[], int n){
-    for (int i = 0; i < n; i++)
-    {
-        cout<<A[i]<<", ";
+// Print Function
+void printArray(const std::vector<int>& A) {
+    for (int i = 0; i < A.size(); i++) {
+        std::cout << A[i] << ", ";
     }
-    cout<<endl;
+    std::cout << std::endl;
 }
 
-//Sort Function
-void bubbleSort(int A[], int n){
+int main() {
+    std::vector<int> A = {1, 2, 5, 6, 12, 54, 625, 7, 23, 9, 987};
 
-    for (int i = 0; i < n-1; i++) 
-    { 
-        bool flag = true;         //Break if already Sorted
-        for (int j = 0; j <n-1-i ; j++) 
-        {
-            if(A[j]>A[j+1]){
+    std::cout << "Original array:" << std::endl;
+    printArray(A);
+
+    // Bubble Sort
+    for (int i = 0; i < A.size() - 1; i++) {
+        bool flag = true;
+        for (int j = 0; j < A.size() - 1 - i; j++) {
+            if (A[j] > A[j + 1]) {
                 flag = false;
-                swap(A[j],A[j+1]); // Using Swap Function
+                swap(A[j], A[j + 1]);
             }
         }
-        if(flag==true)
-            break;  
-    } 
-}
- 
+        if (flag)
+            break;
+    }
 
- 
-int main(){
- 
-    int A[] = {1, 2, 5, 6, 12, 54, 625, 7, 23, 9, 987};
-    
-    int n = 11;
-    printArray(A, n);
-    bubbleSort(A, n); 
-    printArray(A, n); 
+    std::cout << "Sorted array:" << std::endl;
+    printArray(A);
+
     return 0;
 }
